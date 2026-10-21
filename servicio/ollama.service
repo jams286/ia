@@ -1,0 +1,20 @@
+[Unit]
+Description=Ollama (modelos de lenguaje locales, solo procesador) para el servicio ia de la casa
+After=network-online.target
+
+[Service]
+ExecStart=%h/.local/opt/ollama/bin/ollama serve
+Environment=OLLAMA_HOST=127.0.0.1:11434
+# Un modelo y un pedido a la vez; se descarga de la RAM tras 10 min sin uso
+Environment=OLLAMA_MAX_LOADED_MODELS=1
+Environment=OLLAMA_NUM_PARALLEL=1
+Environment=OLLAMA_KEEP_ALIVE=10m
+# Solo procesador: la MX150 da ~15 % más pero calienta más (ver lab/llm-local/RESULTADOS.md)
+Environment=CUDA_VISIBLE_DEVICES=-1
+Environment=OLLAMA_VULKAN=false
+Nice=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=IA de la casa: tareas cortas con un modelo local (usa ollama.service)
+After=network-online.target ollama.service
+Wants=ollama.service
+
+[Service]
+WorkingDirectory=%h/proyectos/casa/ia
+ExecStart=/usr/bin/python3 servidor.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
