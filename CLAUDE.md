@@ -1,5 +1,7 @@
 # ia (casa)
 
+Tracker: ia
+
 Servicio de IA local que usan otras tools. No tiene página propia ni entrada en el hub.
 
 ## Cómo está hecho
